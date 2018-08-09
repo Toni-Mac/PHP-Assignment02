@@ -12,6 +12,8 @@
 <h1>Assignment 02 | Toni McIntire &amp; Yadira Stubbs</h1>
 <h3>Add A Student</h3>
 
+<fieldset>
+<label for="Add student information"></label>
 <form method="POST" action="add_user_processing.php">
 <input type="hidden" name="add" value"add">
 <input type="text" name="studentnumber" id="studentnumber">
@@ -26,6 +28,7 @@
 
 <input type="submit" value="Submit">
 </form>
+</fieldset>
 </div>
     
 </body>
