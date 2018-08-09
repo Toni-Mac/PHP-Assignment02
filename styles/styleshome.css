@@ -1,0 +1,47 @@
+.wrapper {
+    padding:30px;
+    width:1200px;
+    margin:0 auto;
+}
+
+body {
+    background-color:rgb(119, 118, 118);
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 23px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color:white;
+}
+
+table {
+    border:2px solid black;
+    padding:10px;
+    width:800px;
+}
+
+td {
+    margin-right:20px;
+    border:2px solid black;
+    padding:10px;
+    text-align:center;
+    color:black;
+    font-size:20px;
+}
+
+tr{
+    border:2px solid black;
+    padding:10px;
+}
+
+a:visited {
+    color:rgb(50, 206, 206);
+}
+
+th{
+    border:2px solid black;
+    padding:10px;
+    text-align:center;
+    color:black;
+}
