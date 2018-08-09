@@ -1,0 +1,42 @@
+.wrapper {
+    padding:30px;
+    width:1200px;
+    margin:0 auto;
+}
+
+body {
+    background-color:rgb(119, 118, 118);
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 23px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color:white;
+}
+
+label, input  {
+    margin-bottom:10px;
+
+}
+
+#student {
+padding-left:10px;
+
+}
+
+input:last-child {
+    font-size:15px;
+    margin-top:10px;
+}
+
+legend {
+    margin-bottom:20px;
+    font-style:bold;
+    font-size:25px;
+}
+
+form{
+    padding: 20px;
+    width:900px;
+}
