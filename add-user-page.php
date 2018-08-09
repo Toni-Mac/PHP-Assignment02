@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +10,24 @@
 </head>
 <body>
 <div class="wrapper">
+
 <h1>Assignment 02 | Toni McIntire &amp; Yadira Stubbs</h1>
+<?php
+session_start();
+if(isset($_SESSION['errormessage'])){
+	//if there is an error message, display it
+	echo $_SESSION['errormessage'];
+	//clear the error message now that we've displayed them
+    unset($_SESSION['errormessage']);
+}
+
+?>
 <h3>Add A Student</h3>
 
 <fieldset>
 <label for="Add student information"></label>
-<form method="POST" action="add_user_processing.php">
+<form method="post" action="add_user_processing.php">
+
 <input type="hidden" name="add" value"add">
 <input type="text" name="studentnumber" id="studentnumber">
 <label for="studentnumber"> -  Student Number</label>
@@ -30,6 +43,9 @@
 </form>
 </fieldset>
 </div>
-    
+<?php
+
+
+?>
 </body>
 </html>
