@@ -1,58 +1,75 @@
 <?php
-
-require_once("dbinfo.php");
+//FORM VALIDATION AND SQL PROCESSING NEW USERS
 session_start();
+//form validate
 
-//VARIABLES
-    //$confirm                = "";
-    $firstname              ="";
-    $lastname               ="";
-    $studentnumber          ="";
 
-//TEST TO SEE IF VALUES ARE SET
-if(!isset( $_POST["studentnumber"]) || 
-           $_POST["firstname"]      ||
-           $_POST["lastname"]){
-    $_SESSION['error'] = "<p>The form is invalid. Please try again.</p>";
-    header('Location:update-user.php');
-    die();
-    }
 
-        
-//INITIATE 
-    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+//variables
+$studentnumber = "";
+$firstname   = "";
+$lastname    = ""; 
 
-//TEST TO SEE IF SUCCESSFUL
-if( mysqli_connect_errno() != 0  ){
-	die("<p>Your connection was NOT successful</p>");	
-}
+if( isset($_POST['studentnumber'])  ||
+    isset($_POST['firstname'])     ||
+    isset($_POST['lastname'])){
+      $studentnumber = trim($_POST['studentnumber']);
+      $firstname   = ucfirst(strtolower(trim($_POST['firstname'])));
+      $lastname    = ucfirst(strtolower(trim($_POST['lastname']))); 
+      if(empty($_POST['studentnumber'] ) || 
+         empty($_POST['firstname']) ||
+         empty($_POST['lastname'])){
+            $_SESSION['errormessage'] = "<p>You did not provide the name and/or student number Please try again...</p>";
+            header("Location: add-user-page.php");
+            die();
+      }else{
 
-//CREATE A QUERY CALLING USERNAME AND PASSWORD
-//blaj
+            if ($studentnumber !== "/^a[0-9]{8}$/i"){
+                $_SESSION['errormessage'] = "<p>You did not provide a valid student number. Please try again...</p>";
+                header("Location: add-user-page.php");
+                die();
+            }else{
+                //$_SESSION['errormessage'] = "<p>YAY</p>";
 
-    $query 	= "UPDATE students SET firstname='$firstname', lastname='$lastname' WHERE id='$studentnumber';
-    ;";
+            
+            //DATABASE STUFF HERE
+            //GRAB 
+            require_once("./dbinfo.php");
+            //initiate
+            $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+            //check if connection was successful
+            if( mysqli_connect_errno() != 0  ){
+                die("<p>Your connection was NOT successful</p>");	
+            }   
+    
 
-//SEND RESULTS TO THE DATABASE
-    $results = $mysqli->query( $query );
+        //CREATE A QUERY CALLING USERNAME AND PASSWORD
+        //IF SELECT VAR ARE NOT FOUND IN SYSTEM THEN INSERT .
+        $searchQuery = "SELECT * FROM students WHERE id='$studentnumber';";
 
-    if($results == true){
-        $_SESSION['error'] = "<p>The record has been updated</p>";
-        header('Location:home-page.php');
+        //run the query
+        $result = $mysqli->query($searchQuery);
+        //count rows affected
+        $numRowsFoundWhenSearched = $result->num_rows;
+
+        if($numRowsFoundWhenSearched !== 0){
+            $query 	= "UPDATE students SET firstname='$firstname' lastname= '$lastname' WHERE id= '$studentnumber';";    
+        }else{
+            $_SESSION['errormessage'] = "<p>Error: there are no records to match input. </p>";
+            header('Location:home-page.php');
         die();
-    }else {
-        $_SESSION['error'] = "<p>The record has NOT been updated.</p>";
-        header('Location:home-page.php');
-    } 
+        }
+    }
+//end of the PREG MATCH STUFF
+}
+//end of if(not empty)    
+}
+//end of if(isset)
+}    
 
-//DO WE NEED THIS ?? BELOW    
-//DETERMINE NUMBER OF ROWS AFFECTED
-//$numRowsAffected = $mysqli->affected_rows;
-//echo "</p>Number of rows updated: $numRowsAffected</p>";
 
 
-//CLOSE SQL
-    $mysqli->close();
+
 
 
 ?>
