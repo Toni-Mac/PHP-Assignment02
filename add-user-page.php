@@ -21,6 +21,7 @@ if(isset($_SESSION['errormessage'])){
     unset($_SESSION['errormessage']);
 }
 
+
 ?>
 <h3>Add A Student</h3>
 
