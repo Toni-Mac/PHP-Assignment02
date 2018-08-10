@@ -41,6 +41,10 @@ if(isset($_SESSION['errormessage'])){
 <br>
 
 <input type="submit" value="Submit">
+
+<a href="home-page.php">
+   <input type="button" value="Cancel" />
+</a>
 </form>
 </fieldset>
 </div>
