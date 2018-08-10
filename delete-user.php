@@ -5,7 +5,7 @@ session_start();
 if(!isset($_GET['id']) ||
    !isset($_GET['firstname']) ||
    !isset($_GET['lastname']) ){
-    $_SESSION['errormessage'] = "<p>The Student inforamtion not set.</p>";
+    $_SESSION['errormessage'] = "<p>The Student information not set.</p>";
     header('Location:home-page.php');
     die();
    }
