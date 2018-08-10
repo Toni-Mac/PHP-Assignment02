@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Assignment 2 | Toni McIntire & Yadira Stubbs</title>
+    <title>Assignment 2 | Toni McIntire &amp; Yadira Stubbs</title>
     <link rel="stylesheet" href="./styles/styleshome.css">
 </head>
 <body>
 <div class="wrapper">
-<h1>Assignment 2 | Toni McIntire & Yadira Stubbs</h1>
+<h1>Assignment 2 | Toni McIntire &amp; Yadira Stubbs</h1>
 <h3>Students:</h3>
 
 <?php
+
+//ERROR MESSAGES
+session_start();
+
+if(isset($_SESSION['errormessage']) ){
+    echo $_SESSION['errormessage'];
+    unset($_SESSION['errormessage']);
+}
+
 echo "<a href= 'add-user-page.php'> Add a Student</a>";
 //EXTERNAL FILE
 require_once("dbinfo.php");
@@ -52,15 +61,14 @@ echo "</tr>";
 //Fetching rows
 while( $record = $result->fetch_row()  ){
 	//loop through the $record array
-	echo "<tr>";
-	foreach( $record as $field ){
-        echo "<td>" . $field . "</td>";
-    }
-    //adding two columns for delete and update 
-    //delete
-    echo "<td><a href = './delete-user.php'>Delete</a></td>";
-    echo "<td><a href = './update-user.php'>Update</a></td>";
-	echo "</tr>";	
+    
+    echo '<tr>';
+    echo "<td>".$record[0]."</td>";
+    echo "<td>".$record[1]."</td>";
+    echo "<td>".$record[2]."</td>";
+    echo '<td><a href="delete-user.php?id='.$record[0].'&firstname='.$record[1].'&lastname='.$record[2].'">Delete</a></td>';
+    echo '<td><a href="update-user.php?id='.$record[0].'&firstname='.$record[1].'&lastname='.$record[2].'">Update</td>';
+    echo '</tr>';
 }
 echo "</table>";
 
