@@ -72,14 +72,6 @@ echo "</tr>";
 //Fetching rows
 while( $record = $result->fetch_row()  ){
 	//loop through the $record array
-    $i = 0;
-    while($i < $numberRows){
-        if($i % 2 == 0){
-            echo '<tr class = "style1" >';
-        }else{
-            echo '<tr class = "style2" >';
-        }
-    }
     echo '<tr>';
     echo "<td>".$record[0]."</td>";
     echo "<td>".$record[1]."</td>";
@@ -89,6 +81,7 @@ while( $record = $result->fetch_row()  ){
     echo '</tr>';
 }
 echo "</table>";
+
 
 ?>
 </div>
