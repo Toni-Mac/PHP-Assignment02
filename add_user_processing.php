@@ -24,8 +24,19 @@ if( isset($_POST['studentnumber'])  ||
             header("Location: add-user-page.php");
             die();
       }else{
-            //DATABASE STUFF HERE
+            //PRE-MATCH HERE
+            // $isValid = "";
+            // $error = "";
 
+            if ($studentnumber !== "/^a[0-9]{8}$/i"){
+                $_SESSION['errormessage'] = "<p>You did not provide a valid student number. Please try again...</p>";
+                header("Location: add-user-page.php");
+                die();
+            }else{
+                $_SESSION['errormessage'] = "<p>YAY</p>";
+
+            
+            //DATABASE STUFF HERE
             //GRAB 
             require_once("./dbinfo.php");
             //initiate
@@ -67,18 +78,13 @@ if( isset($_POST['studentnumber'])  ||
                 header('Location:home-page.php');
                 die();
             }
-    
-
-        
-                // header('Location:home-page.php');
-                // die();
-
-
     }else {
         $_SESSION['errormessage'] = "<p>Error: the record is already in the database. </p>";
         header('Location:home-page.php');
         die();
     }
+//end of the PREG MATCH STUFF
+}
 //end of if(not empty)    
 }
 //end of if(isset)
