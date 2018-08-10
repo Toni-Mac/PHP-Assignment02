@@ -28,6 +28,7 @@ if( mysqli_connect_errno() != 0  ){
 }
 
 //CREATE A QUERY CALLING USERNAME AND PASSWORD
+//blaj
 
     $query 	= "UPDATE students SET firstname='$firstname', lastname='$lastname' WHERE id='$studentnumber';
     ;";
