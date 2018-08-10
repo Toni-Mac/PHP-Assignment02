@@ -1,15 +1,14 @@
 <?php 
 
-
-// if(!isset($_GET['studentnumber']) ||
-//    !isset($_GET['firstname']) ||
-//    !isset($_GET['lastname']) ){
-//     $_SESSION['error'] = 
-//     header('Location:home-page');
-//     die();
-//    }
 // Make sure the GET variables are set..if not bounce them off this page with errors back to the table page...
-
+session_start();
+if(!isset($_GET['id']) ||
+   !isset($_GET['firstname']) ||
+   !isset($_GET['lastname']) ){
+    $_SESSION['errormessage'] = "<p>The form is invalid.</p>";
+    header('Location:home-page.php');
+    die();
+   }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +26,9 @@
 
 <fieldset>
 <legend>Are you sure you want to delete?</legend>
-<form method="POST" action="delete_user_processing.php">
-<input type="hidden" name="studentnumber" value= "<?php echo $affected_rows?>"
-<input type="hidden" name="firstname" value="<?php echo $affected_rows?>">
-<input type="hidden" name="lastname" value="<?php echo $affected_rows?>">
-
+<?php echo "<label for='id'>".$_GET['id'] ." &nbsp ".$_GET['firstname'], $_GET['lastname']."</label>";?>
+<form method="GET" action="delete_user_processing.php">
+<input type="hidden" name="id" value= "id">
 <input type="radio" name="confirm" id="yes" value="yes">
 <label for="yes">Yes</label>
 <br>
@@ -39,6 +36,7 @@
 <label for="no">No</label>
 <br>
 <input type="submit" value="Submit">
+<input type="button" value="">
 </form>
 </fieldset>
 </div>
