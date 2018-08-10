@@ -31,6 +31,14 @@ td {
 
 }
 
+.style1 {
+    background-color: rgb(187, 184, 184);
+}
+
+.style2 {
+    background-color: white;
+}
+
 tr{
     border:2px solid black;
     padding:10px;
