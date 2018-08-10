@@ -32,9 +32,10 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 //TEST TO SEE IF SUCCESSFUL
 if( mysqli_connect_errno() != 0  ){
 	die("<p>Your connection was NOT successful</p>");	
-}else {
-    echo "<p>Yay! You are connected to the database!</p>";
 }
+// else {
+//     echo "<p>Yay! You are connected to the database!</p>";
+// }
 
 //CREATE A QUERY CALLING USERNAME AND PASSWORD
 $query 	= "SELECT id, firstname, lastname FROM students;";
