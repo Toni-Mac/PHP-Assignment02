@@ -41,7 +41,7 @@ if(!isset($_GET['id']) ||
 </fieldset>
 </form>
 <div class="cancel">
-    <a href="home-page.php">Cancel the deletion and return to the home page.</a>
+    <a href="home-page.php">Cancel and return to home page</a>
 </div>  
 </div>
     
