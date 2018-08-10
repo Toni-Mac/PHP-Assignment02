@@ -29,7 +29,7 @@ if(isset($_SESSION['errormessage'])){
 <label for="Add student information"></label>
 <form method="post" action="add_user_processing.php">
 
-<input type="hidden" name="add" value"add">
+<input type="hidden" name="add" value="add">
 <input type="text" name="studentnumber" id="studentnumber">
 <label for="studentnumber"> -  Student Number</label>
 <br>

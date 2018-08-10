@@ -28,7 +28,7 @@ if( isset($_POST['studentnumber'])  ||
             // $isValid = "";
             // $error = "";
 
-            if ($studentnumber !== "/^a[0-9]{8}$/i"){
+            if (!preg_match('/^a[0-9]{8}$/i', $studentnumber)){
                 $_SESSION['errormessage'] = "<p>You did not provide a valid student number. Please try again...</p>";
                 header("Location: add-user-page.php");
                 die();
