@@ -5,7 +5,7 @@ session_start();
 if(!isset($_GET['id']) ||
    !isset($_GET['firstname']) ||
    !isset($_GET['lastname']) ){
-    $_SESSION['errormessage'] = "<p>The form is invalid.</p>";
+    $_SESSION['errormessage'] = "<p>The Student inforamtion not set.</p>";
     header('Location:home-page.php');
     die();
    }
@@ -24,11 +24,13 @@ if(!isset($_GET['id']) ||
 <h1>Assignment 02 | Toni McIntire &amp; Yadira Stubbs</h1>
 <h3>Delete A Student</h3>
 
+
+<form method="post" action="delete_user_processing.php">
 <fieldset>
 <legend>Are you sure you want to delete?</legend>
-<?php echo "<label for='id'>".$_GET['id'] ." &nbsp ".$_GET['firstname'], $_GET['lastname']."</label>";?>
-<form method="GET" action="delete_user_processing.php">
-<input type="hidden" name="id" value= "id">
+<?php echo "<label for='id'>".$_GET['id'] ." - ".$_GET['firstname']." ". $_GET['lastname']."</label>";?>
+<br>
+<input type="hidden" name="id" value= "<?php echo $_GET['id'] ?>">
 <input type="radio" name="confirm" id="yes" value="yes">
 <label for="yes">Yes</label>
 <br>
@@ -36,9 +38,11 @@ if(!isset($_GET['id']) ||
 <label for="no">No</label>
 <br>
 <input type="submit" value="Submit">
-<input type="button" value="">
-</form>
 </fieldset>
+</form>
+<div class="cancel">
+    <a href="home-page.php">Cancel the deletion and return to the home page.</a>
+</div>  
 </div>
     
 </body>

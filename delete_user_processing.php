@@ -1,69 +1,51 @@
 <?php
-
-require_once("dbinfo.php");
 session_start();
 
-//VARIABLES
-    $confirm                = "";
-    $id                     = "";
-
 //TEST TO SEE IF VALUES ARE SET
-if(!isset( $_GET["confirm"]) ){
+if(!isset( $_POST["confirm"]) || !isset($_POST['id'])){
     $_SESSION['errormessage'] = "<p>The form is invalid. Please try again.</p>";
-    header('Location:home-page.php');
+    header('Location: home-page.php');
     die();
-    }
+}
 
 //NORMALIZE DATA
-    $confirm = array($_GET["confirm"]);
-        
-//INITIATE 
-    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$confirm = $_POST["confirm"];
+$id = $_POST['id'];
+
+if($confirm == 'no'){
+    $_SESSION['errormessage'] = "<p>Student deletion was cancelled. Student NOT deleted.</p>";
+    header('Location: home-page.php');
+    die();
+}
+
+// Get DB Info
+require_once("dbinfo.php");
+
+// //INITIATE 
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 //TEST TO SEE IF SUCCESSFUL
 if( mysqli_connect_errno() != 0  ){
-	die("<p>Your connection was NOT successful</p>");	
+    $_SESSION['errormessage'] = "<p>Problem connecting to the database. Student NOT deleted. Please try again.</p>";
+    header('Location: home-page.php');
+    die();	
 }
 
-//CREATE A QUERY CALLING USERNAME AND PASSWORD
-    $query 	= "DELETE FROM students WHERE id ='.$record[0].';";
+$id = $mysqli->real_escape_string($id);
 
+//CREATE A QUERY CALLING ID
+$query 	= "DELETE FROM students WHERE id ='$id';";
 //SEND RESULTS TO THE DATABASE
-    $results = $mysqli->query( $query );
+$mysqli->query($query);
 
-    if($results==true){
-        $_SESSION['errormessage'] = "<p>The record has been deleted.</p>";
-        // header('Location:home-page.php');
-        die();
-    }else {
-        $_SESSION['errormessage'] = "<p>The record has NOT been deleted.</p>";
-        // header('Location:home-page.php');
-        die();
-    }
-    
-//DETERMINE NUMBER OF ROWS AFFECTED
-$numRowsAffected = $mysqli->affected_rows;
-echo "</p>Number of rows deleted: $numRowsAffected</p>";
-
-//CLOSE SQL
-$mysqli->close();
-
-//VARIABLES
-$isFormValid = true;
-
-//TEST TO SEE WHAT USER PICKS
-if($confirm == "yes"){
-    $isFormValid = true;
-    $_SESSION['errormessage'] = "<p>Record deleted : " . $_GET["id"] . "</p>";
-    die();
+if($mysqli->affected_rows > 0){
+    $mysqli->close();
+    $_SESSION['successmessage'] = '<p>Student successfully deleted.</p>';
+    header('Location: home-page.php');
+}else{
+    $mysqli->close();
+    $_SESSION['errormessage'] = '<p>Oh oh...Problem deleting student. Student was NOT deleted. Please try again.</p>'; 
+    header('Location: home-page.php');
 }
-
-//DELETE USER SUCCESSFUL
-    $isFormValid = false;
-    echo $_SESSION['errormessage'] = "<p>Delete Record Aborted</p>";
-    header('Location:home-page.php');
-    die();
-
-
-
+ 
 ?>

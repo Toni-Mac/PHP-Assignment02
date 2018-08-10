@@ -22,6 +22,11 @@ if(isset($_SESSION['errormessage']) ){
     unset($_SESSION['errormessage']);
 }
 
+if(isset($_SESSION['successmessage'])){
+    echo $_SESSION['successmessage'];
+    unset($_SESSION['successmessage']);
+}
+
 echo "<a href= 'add-user-page.php'> Add a Student</a>";
 //EXTERNAL FILE
 require_once("dbinfo.php");
