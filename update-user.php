@@ -1,3 +1,14 @@
+<?PHP
+    session_start();
+
+    if(!isset($_GET['id']) ||
+    !isset($_GET['firstname']) ||
+    !isset($_GET['lastname']) ){
+    header('Location:home-page.php');
+    die();
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +23,7 @@
 <h1>Assignment 02 | Toni McIntire &amp; Yadira Stubbs</h1>
 <h3>Update A Student</h3>
 <?php
-session_start();
+
 if(isset($_SESSION['errormessage'])){
 	//if there is an error message, display it
 	echo $_SESSION['errormessage'];
@@ -27,13 +38,13 @@ if(isset($_SESSION['errormessage'])){
 <input type="hidden" name="update" id="update">
 <fieldset>
 <legend>New Data</legend>
-<input type="text" name="studentnumber" id="student" value="">
+<input type="text" name="studentnumber" id="student" value="<?php echo $_GET['id']?>">
 <label for="studentnumber"> - Student Number</label>
 <br>
-<input type="text" name="firstname" id="student" value="">
+<input type="text" name="firstnamechange" id="student" value="<?php echo $_GET['firstname']?>">
 <label for="firstname"> - Firstname</label>
 <br>
-<input type="text" name="lastname" id="student" value="">
+<input type="text" name="lastnamechange" id="student" value="<?php echo $_GET['lastname']?>">
 <label for="lastname"> - Lastname</label>
 <br>
 </fieldset>

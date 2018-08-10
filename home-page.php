@@ -26,6 +26,11 @@ if(isset($_SESSION['successmessage'])){
     echo $_SESSION['successmessage'];
     unset($_SESSION['successmessage']);
 }
+if(isset($_SESSION['firstNameChange']) ||
+    isset($_SESSION['lastNameChange'])){
+          echo $_SESSION['firstNameChange'];
+          echo $_SESSION['lastNameChange'];
+    }
 
 echo "<a href= 'add-user-page.php'> Add a Student</a>";
 //EXTERNAL FILE
@@ -67,7 +72,14 @@ echo "</tr>";
 //Fetching rows
 while( $record = $result->fetch_row()  ){
 	//loop through the $record array
-    
+    $i = 0;
+    while($i < $numberRows){
+        if($i % 2 == 0){
+            echo '<tr class = "style1" >';
+        }else{
+            echo '<tr class = "style2" >';
+        }
+    }
     echo '<tr>';
     echo "<td>".$record[0]."</td>";
     echo "<td>".$record[1]."</td>";
