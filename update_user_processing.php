@@ -27,7 +27,7 @@ $results = $mysqli->query($query);
 
 if($results == true){
     $mysqli->close();
-    $_SESSION['successmessage'] = '<p>Student successfully fkjdkfjekfjke updated.</p>';
+    $_SESSION['successmessage'] = '<p>Student successfully was updated.</p>';
     //$_SESSION['firstNameChange'];
     //$_SESSION['lastNameChange'];
     header('Location: home-page.php');
